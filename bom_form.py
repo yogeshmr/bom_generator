@@ -15,6 +15,12 @@ class BomGeneratorForm(wx.Frame):
             style=wx.DEFAULT_DIALOG_STYLE
         )
 
+        self.board = pcbnew.GetBoard()
+        if not self.board:
+            wx.MessageBox("No board loaded!", "Error", wx.OK | wx.ICON_ERROR)
+            self.Destroy()
+            return
+
         self.SetSizeHints(wx.Size(400, 150), wx.DefaultSize)
         self.SetBackgroundColour(wx.LIGHT_GREY)
 
@@ -49,15 +55,15 @@ class BomGeneratorForm(wx.Frame):
     def onGenerateButtonClick(self, event):
         self.mGenerateButton.Hide()
         self.mGaugeStatus.Show()
+        self.Fit()
         self.SetTitle('BOM Generator (Processing...)')
 
         StatusEvent.invoke(self, self.updateDisplay)
-        BomThread(pcbnew.GetBoard())
+        BomThread(self, self.board)  # Pass self as the window reference
 
     def updateDisplay(self, status):
         if status.data == -1:
             self.SetTitle('BOM Generator (Done!)')
-            pcbnew.Refresh()
             self.Destroy()
         else:
             self.mGaugeStatus.SetValue(int(status.data))
