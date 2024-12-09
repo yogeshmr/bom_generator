@@ -1,0 +1,25 @@
+{
+    "$schema": "https://go.kicad.org/pcm/schemas/v1",
+    "name": "BOM Generator",
+    "description": "Generate Bill of Materials in CSV format",
+    "description_full": "Plugin to generate detailed Bill of Materials (BOM) in CSV format for PCB manufacturing",
+    "identifier": "com.yogeshmr.bom_generator",
+    "type": "plugin",
+    "author": {
+        "name": "Your Name",
+        "contact": {
+            "web": "https://github.com/yogeshmr/bom_generator"
+        }
+    },
+    "license": "MIT",
+    "resources": {
+        "homepage": "https://github.com/yogeshmr/bom_generator"
+    },
+    "versions": [
+        {
+            "version": "1.0.0",
+            "status": "stable",
+            "kicad_version": "6.0"
+        }
+    ]
+}
